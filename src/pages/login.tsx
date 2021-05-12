@@ -1,19 +1,25 @@
-import { PageHeader } from 'antd';
 import React from 'react'
+import { Row, Form, Input, Button, Divider } from 'antd'
 
 const login = () => {
     return (
-        <div className="align-middle">
-            <div className="p-5">
-                <div className="w-full px-2.5 py-1 border focus:outline-none rounded-md min-h-screen">
-                    <PageHeader
-                        className="mb-2"
-                        title="Daytechstagram"
-                        subTitle="Share your hapiness"
-                    />
-                </div>
-            </div>
-        </div>
+        <React.Fragment>
+            <Divider orientation="center">Sign in Form</Divider>
+            <Row justify="center" className="p-5">
+                <Form>
+                    <Form.Item label="Username">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Password">
+                        <Input.Password />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary">Log in</Button>
+                    </Form.Item>
+                </Form>
+            </Row>
+        </React.Fragment>
+        
     );
 }
 
