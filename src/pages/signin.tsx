@@ -1,7 +1,8 @@
 import React from 'react'
 import { Row, Form, Input, Button, Divider } from 'antd'
+import Link from 'next/link'
 
-const login = () => {
+const signin = () => {
     return (
         <React.Fragment>
             <Divider orientation="center">Sign in Form</Divider>
@@ -14,7 +15,13 @@ const login = () => {
                         <Input.Password />
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary">Log in</Button>
+                        <Button
+                            className="mr-2" 
+                            type="primary"
+                        >
+                            Log in
+                        </Button>
+                        <Link href='/signup'>forgot password?</Link>
                     </Form.Item>
                 </Form>
             </Row>
@@ -23,4 +30,4 @@ const login = () => {
     );
 }
 
-export default login;
+export default signin;

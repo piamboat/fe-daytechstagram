@@ -8,7 +8,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <React.Fragment>
       <PageHeader
-        className="mb-2"
         title="Daytechstagram"
         subTitle="Share your happiness"
       />
