@@ -6,7 +6,7 @@ const signup = () => {
     return (
         <React.Fragment>
             <Divider orientation="center">Sign up Form</Divider>
-            <Row justify="center" className="p-5">
+            <Row justify="center" className="p-5 bg-red-500 min-h-screen">
                 <Form>
                     <Form.Item
                         label="Username"
