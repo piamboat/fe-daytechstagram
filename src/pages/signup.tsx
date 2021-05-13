@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Form, Input, Button, Divider } from 'antd'
 import Link from 'next/link'
 
-const signup = () => {
+const signup:React.FC = () => {
     return (
         <React.Fragment>
             <Divider orientation="center">Sign up Form</Divider>
