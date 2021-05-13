@@ -1,6 +1,6 @@
 import React from 'react'
-import { Post } from './Type'
-import { Card, Avatar, message } from 'antd'
+import { Post } from './Type';
+import { Card, Avatar } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
 interface DisplayFeedProps {
