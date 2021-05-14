@@ -1,6 +1,6 @@
 import LoginForm from '@/components/LoginForm'
 import React from 'react'
-import daytechbackend from './api/daytechbackend'
+import { authAxios } from './api/daytechbackend'
 
 const signin:React.FC = () => {
     // headers: {
@@ -12,7 +12,7 @@ const signin:React.FC = () => {
             params.append('username', username)
             params.append('password', password)
 
-            const response = await  daytechbackend.post('/users/signin', params)
+            const response = await  authAxios.post('/users/signin', params)
             // store access token we get
             console.log('data: ', response.data)
         } catch (error) {

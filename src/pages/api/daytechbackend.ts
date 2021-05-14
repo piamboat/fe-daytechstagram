@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default axios.create({
+export const authAxios = axios.create({
     baseURL: 'http://localhost:3000',
     headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
