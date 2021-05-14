@@ -3,9 +3,6 @@ import React from 'react'
 import { authAxios } from './api/daytechbackend'
 
 const signin:React.FC = () => {
-    // headers: {
-    //     Authorization: `Bearer ${accessToken}`
-    // }
     const onSignin = async (username: string, password: string) => {
         try {
             const params = new URLSearchParams()
