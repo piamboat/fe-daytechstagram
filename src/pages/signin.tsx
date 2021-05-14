@@ -1,32 +1,29 @@
+import LoginForm from '@/components/LoginForm'
 import React from 'react'
-import { Row, Form, Input, Button, Divider } from 'antd'
-import Link from 'next/link'
+import daytechbackend from './api/daytechbackend'
 
 const signin:React.FC = () => {
+    // headers: {
+    //     Authorization: `Bearer ${accessToken}`
+    // }
+    const onSignin = async (username: string, password: string) => {
+        try {
+            const params = new URLSearchParams()
+            params.append('username', username)
+            params.append('password', password)
+
+            const response = await  daytechbackend.post('/users/signin', params)
+            // store access token we get
+            console.log('data: ', response.data)
+        } catch (error) {
+            console.log('error: ', error)
+        }    
+    }
+
     return (
         <React.Fragment>
-            <Divider orientation="center">Sign in Form</Divider>
-            <Row justify="center" className="p-5 min-h-screen">
-                <Form>
-                    <Form.Item label="Username">
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Password">
-                        <Input.Password />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button
-                            className="mr-2" 
-                            type="primary"
-                        >
-                            Log in
-                        </Button>
-                        <Link href='/signup'>forgot password?</Link>
-                    </Form.Item>
-                </Form>
-            </Row>
+            <LoginForm onSignin={onSignin} />
         </React.Fragment>
-        
     );
 }
 

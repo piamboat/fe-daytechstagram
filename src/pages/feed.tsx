@@ -35,17 +35,17 @@ const feed:React.FC = () => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-    req: {
-        headers: { cookie },
-    }
-}) => {
-   return {
-       redirect: {
-           destination: '/signin',
-           permanent: false,
-       }
-   }
-}
+// export const getServerSideProps: GetServerSideProps = async ({
+//     req: {
+//         headers: { cookie },
+//     }
+// }) => {
+//    return {
+//        redirect: {
+//            destination: '/signin',
+//            permanent: false,
+//        }
+//    }
+// }
 
 export default feed
