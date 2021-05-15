@@ -17,8 +17,9 @@ const signin:React.FC = () => {
             params.append('password', password)
             const { data } = await  authAxios.post('/users/signin', params)
 
+            const today = new Date()
             // set jwt
-            cookieCutter.set('jwt', data.accessToken)
+            cookieCutter.set('jwt', data.accessToken, { expires: today.getTime() + (60 * 60 * 1000) })
             // redirect to feed
             router.push('/feed')
         } catch (error) {
