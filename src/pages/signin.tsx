@@ -1,19 +1,28 @@
-import LoginForm from '@/components/LoginForm'
 import React from 'react'
+import LoginForm from '@/components/LoginForm'
 import { authAxios } from './api/daytechbackend'
+import { useRouter } from 'next/router'
+import { message } from 'antd';
+
+// using cookie-cutter package
+const cookieCutter = require('cookie-cutter');
 
 const signin:React.FC = () => {
+    const router = useRouter()
+
     const onSignin = async (username: string, password: string) => {
         try {
             const params = new URLSearchParams()
             params.append('username', username)
             params.append('password', password)
+            const { data } = await  authAxios.post('/users/signin', params)
 
-            const response = await  authAxios.post('/users/signin', params)
-            // store access token we get
-            console.log('data: ', response.data)
+            // set jwt
+            cookieCutter.set('jwt', data.accessToken)
+            // redirect to feed
+            router.push('/feed')
         } catch (error) {
-            console.log('error: ', error)
+            message.error('Username or password is/are incorrect')
         }    
     }
 
