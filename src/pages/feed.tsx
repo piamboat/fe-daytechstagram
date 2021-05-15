@@ -56,8 +56,26 @@ const feed:React.FC<feedProps> = ({ jwt, feeds }) => {
         console.log('edit text')
     }
 
-    const onPostDelete = (id: number) => {
-        console.log('post deleted id: ', id)
+    const onPostDelete = async (id: number) => {
+        try {
+            await Axios.delete(`/posts/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                }
+            })
+            message.success('Successfully delete a post')
+            // get posts
+            const { data } = await Axios.get('/posts', {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                }
+            })
+            // set posts
+            setPosts(data)
+        }
+        catch (error) {
+            message.error('Unable to delete a post')
+        }
     }
 
     return (
