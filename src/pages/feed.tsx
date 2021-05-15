@@ -50,16 +50,6 @@ const feed:React.FC<feedProps> = ({ jwt, feeds }) => {
         } catch (error) {
             message.error('Unable to create post')
         }
-
-        // const dateObj = new Date()
-        // const time = `Added on ${dateObj.getHours()}:${dateObj.getMinutes()}`
-        // const newPost = {
-        //     id: Math.floor(Math.random() * 10000) + 1,
-        //     text: message,
-        //     time
-        // }
-
-        // setPosts([newPost, ...posts])
     }
 
     const onPostEdit = (text: string) => {
