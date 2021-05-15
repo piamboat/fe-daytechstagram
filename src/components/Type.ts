@@ -1,5 +1,6 @@
 export interface Post {
     id: number,
     text: string,
-    time: string
+    created_at: string
+    updated_at: string
 }

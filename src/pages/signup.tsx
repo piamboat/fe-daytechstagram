@@ -14,7 +14,7 @@ const signup:React.FC = () => {
             params.append('password', password)
             await  authAxios.post('/users/signup', params)
 
-            message.success('Successfully sign up, Please wait a moment');
+            message.success('Successfully sign up, Please wait a moment')
             // redirect to signin
             router.push('/signin')
         } catch (error) {

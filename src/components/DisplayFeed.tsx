@@ -31,7 +31,7 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
             >
                 <Meta
                 avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title={post.time}
+                title={post.created_at}
                 description={post.text}
                 />
             </Card>
