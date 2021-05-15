@@ -1,9 +1,7 @@
 import 'antd/dist/antd.css';
 import 'tailwindcss/tailwind.css'
 import { AppProps } from 'next/app';
-import { PageHeader } from 'antd';
-import { motion, MotionConfig } from 'framer-motion';
-import React from 'react';
+import { motion } from 'framer-motion';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
   return (
@@ -11,10 +9,6 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       pageInit: { opacity: 0 },
       pageAnimate: { opacity: 1 },
     }}>
-      <PageHeader
-        title="Daytechstagram"
-        subTitle="Share your happiness"
-      />
       <Component {...pageProps} />
     </motion.div>
   )

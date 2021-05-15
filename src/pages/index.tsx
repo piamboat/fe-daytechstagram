@@ -1,9 +1,14 @@
 import React from 'react'
 import Link from 'next/link'
+import { PageHeader } from 'antd';
 
 export default function Home() {
   return (
     <div>
+        <PageHeader
+          title="Daytechstagram"
+          subTitle="Share your happiness"
+        />
         <div className="md:flex justify-between py-20 px-10 bg-red-500">
             <div className="md:w-1/2 mb-10 md: mb-0 items-center">
                 <h2 className="text-4xl lg:text-6xl text-white mb-6">

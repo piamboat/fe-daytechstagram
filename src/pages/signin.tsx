@@ -2,7 +2,7 @@ import React from 'react'
 import LoginForm from '@/components/LoginForm'
 import { authAxios } from './api/daytechbackend'
 import { useRouter } from 'next/router'
-import { message } from 'antd';
+import { message, PageHeader } from 'antd';
 
 // using cookie-cutter package
 const cookieCutter = require('cookie-cutter');
@@ -28,6 +28,10 @@ const signin:React.FC = () => {
 
     return (
         <React.Fragment>
+            <PageHeader
+                title="Daytechstagram"
+                subTitle="Share your happiness"
+            />
             <LoginForm onSignin={onSignin} />
         </React.Fragment>
     );
