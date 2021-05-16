@@ -62,7 +62,7 @@ const feed:React.FC<feedProps> = ({ jwt, feeds }) => {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             })
-    
+
             // get posts
             const { data } = await Axios.get('/posts', {
                 headers: {

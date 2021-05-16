@@ -24,7 +24,7 @@ const signin:React.FC = () => {
             router.push('/feed')
         } catch (error) {
             message.error('Username or password is/are incorrect')
-        }    
+        }
     }
 
     return (
