@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Post } from './Type';
 import { Comment, Avatar, Modal, Form, Input } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
+import Link from 'next/link';
 
 interface DisplayFeedProps {
     posts: Post[]
@@ -49,7 +50,9 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
                     actions={[
                         <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
                         <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
-                        <span key="comment-nested-reply-to">Reply to</span>,
+                        <Link key={post.id} href="/post/[id]" as={`/post/${post.id}`}>
+                            <span key="comment-nested-reply-to">Reply to</span>
+                        </Link>,
                         ]}
                     author={post.created_at}
                     avatar={
@@ -59,9 +62,8 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
                     />
                     }
                     content={post.text}
-                >
-                </Comment>
-            </div> 
+                />
+            </div>
         )
     })
 
