@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Post } from './Type';
-import { Card, Avatar, Modal, Form, Input } from 'antd'
+import { Comment, Avatar, Modal, Form, Input } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
 interface DisplayFeedProps {
@@ -15,7 +15,6 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
     const [selectedId, setSelectedId] = useState(0)
 
     const handleOk = () => {
-        console.log('submit id: ', selectedId)
         onPostEdit(selectedId, text)
         setIsModalVisible(false)
     };
@@ -25,7 +24,6 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
     };
     
     const onPostEditActivate = (id: number) => {
-        console.log('active id: ', id)
         setSelectedId(id)
         setIsModalVisible(true)
     }
@@ -35,8 +33,6 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
     }
 
     const renderedFeed = posts.map(post => {
-        const { Meta } = Card
-
         return (
             <div key={post.id}>
                 <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
@@ -49,19 +45,22 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
                         </Form.Item>
                     </Form>
                 </Modal>
-                <Card
-                    className="mt-2"
+                <Comment
                     actions={[
-                    <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
-                    <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
-                    ]}
-                >
-                    <Meta
-                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                    title={post.created_at}
-                    description={post.text}
+                        <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
+                        <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
+                        <span key="comment-nested-reply-to">Reply to</span>,
+                        ]}
+                    author={post.created_at}
+                    avatar={
+                    <Avatar
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        alt="Han Solo"
                     />
-                </Card> 
+                    }
+                    content={post.text}
+                >
+                </Comment>
             </div> 
         )
     })
