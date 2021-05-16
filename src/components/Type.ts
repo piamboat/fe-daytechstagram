@@ -3,4 +3,12 @@ export interface Post {
     text: string,
     created_at: string
     updated_at: string
+    comments: Comment[]
+}
+
+export interface Comment {
+    id: number,
+    text: string,
+    created_at: string
+    updated_at: string
 }
