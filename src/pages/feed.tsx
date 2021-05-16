@@ -5,7 +5,7 @@ import DisplayFeed from '@/components/DisplayFeed'
 import { GetServerSideProps } from 'next';
 import { Button, message, PageHeader } from 'antd';
 import { useRouter } from 'next/router'
-import { Axios } from './api/daytechbackend';
+import { Axios, updateAxios } from './api/daytechbackend';
 import Cookies from 'cookies'
 
 // using cookie-cutter package
@@ -52,8 +52,29 @@ const feed:React.FC<feedProps> = ({ jwt, feeds }) => {
         }
     }
 
-    const onPostEdit = (text: string) => {
-        console.log('edit text')
+    const onPostEdit = async (id: number, text: string) => {
+        try {
+            const params = new URLSearchParams()
+            params.append('text', text)
+            await updateAxios.patch(`/posts/${id}/text`, params, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+    
+            // get posts
+            const { data } = await Axios.get('/posts', {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                }
+            })
+            // set posts
+            setPosts(data)
+        }
+        catch (error) {
+            message.error('Unable to edit a post')
+        }
     }
 
     const onPostDelete = async (id: number) => {

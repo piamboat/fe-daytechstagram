@@ -1,16 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Post } from './Type';
-import { Card, Avatar } from 'antd'
+import { Card, Avatar, Modal, Form, Input } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
 interface DisplayFeedProps {
     posts: Post[]
-    onPostEdit: (text: string) => void
+    onPostEdit: (id: number, text: string) => void
     onPostDelete: (id: number) => void
 }
+
 const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelete }) => {
-    const onPostEditActivate = () => {
-        onPostEdit('test')
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [text, setText] = useState('')
+    const [selectedId, setSelectedId] = useState(0)
+
+    const handleOk = () => {
+        console.log('submit id: ', selectedId)
+        onPostEdit(selectedId, text)
+        setIsModalVisible(false)
+    };
+    
+    const handleCancel = () => {
+        setIsModalVisible(false)
+    };
+    
+    const onPostEditActivate = (id: number) => {
+        console.log('active id: ', id)
+        setSelectedId(id)
+        setIsModalVisible(true)
     }
 
     const onPostDeleteActivate = (id: number) => {
@@ -18,23 +35,34 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
     }
 
     const renderedFeed = posts.map(post => {
-        const { Meta } = Card;
+        const { Meta } = Card
 
         return (
-            <Card
-                className="mt-2"
-                key={ post.id }
-                actions={[
-                <EditOutlined key="edit" onClick={ onPostEditActivate } />,
-                <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
-                ]}
-            >
-                <Meta
-                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                title={post.created_at}
-                description={post.text}
-                />
-            </Card>
+            <div key={post.id}>
+                <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <Form>
+                        <Form.Item label="Text">
+                            <Input
+                                value={ text }
+                                onChange={ e => setText(e.target.value) }
+                            />
+                        </Form.Item>
+                    </Form>
+                </Modal>
+                <Card
+                    className="mt-2"
+                    actions={[
+                    <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
+                    <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
+                    ]}
+                >
+                    <Meta
+                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title={post.created_at}
+                    description={post.text}
+                    />
+                </Card> 
+            </div> 
         )
     })
 
