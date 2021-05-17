@@ -2,7 +2,7 @@ import React from 'react'
 import { PageHeader, message } from 'antd'
 import { useRouter } from 'next/router'
 import SignupForm from '../components/SignupForm';
-import { authAxios } from './api/daytechbackend'
+import { authAxios } from '../helpers/daytechbackend'
 
 const signup:React.FC = () => {
     const router = useRouter()

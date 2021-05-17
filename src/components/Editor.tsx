@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Form, Button, Input, Comment, Avatar, message, Modal } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Comment as cm } from '@/components/Type'
-import { Axios, updateAxios } from '../pages/api/daytechbackend';
+import { Axios, updateAxios } from '../helpers/daytechbackend';
 
 interface EditorProps {
     comments: cm[],

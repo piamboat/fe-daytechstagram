@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from '@/components/LoginForm'
-import { authAxios } from './api/daytechbackend'
+import { authAxios } from '../helpers/daytechbackend'
 import { useRouter } from 'next/router'
 import { message, PageHeader } from 'antd';
 

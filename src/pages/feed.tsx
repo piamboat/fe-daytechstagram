@@ -5,7 +5,7 @@ import DisplayFeed from '@/components/DisplayFeed'
 import { GetServerSideProps } from 'next';
 import { Button, message, PageHeader } from 'antd';
 import { useRouter } from 'next/router'
-import { Axios, updateAxios } from './api/daytechbackend';
+import { Axios, updateAxios } from '../helpers/daytechbackend';
 import Cookies from 'cookies'
 
 // using cookie-cutter package

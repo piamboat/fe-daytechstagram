@@ -1,7 +1,7 @@
 import React from 'react'
 import { GetServerSideProps } from 'next'
 import Cookies from 'cookies'
-import { Axios } from '../../api/daytechbackend'
+import { Axios } from '../../../helpers/daytechbackend'
 import { Post } from '@/components/Type'
 import { Comment, Avatar, PageHeader, Button, message } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
