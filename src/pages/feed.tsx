@@ -26,11 +26,14 @@ const feed:React.FC<feedProps> = ({ jwt, feeds }) => {
         router.push('/')
     }
 
-    const onMessagePost = async (text: string) => {
+    const onMessagePost = async (text: string, file: File) => {
+        console.log('file: ', file)
+
         try {
             // create a post
             const formdatas = new FormData()
             formdatas.append('text', text)
+            formdatas.append('image', file)
             await Axios.post('/posts', formdatas, {
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
