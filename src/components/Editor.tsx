@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Form, Button, Input, Comment, Avatar, message } from 'antd'
+import { Form, Button, Input, Comment, Avatar, message, Modal } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Comment as cm } from '@/components/Type'
-import { Axios } from '../pages/api/daytechbackend';
+import { Axios, updateAxios } from '../pages/api/daytechbackend';
 
 interface EditorProps {
     comments: cm[],
@@ -15,6 +15,9 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
     const [value, setValue] = useState('')
     const [submitting, setSubmitting] = useState(false)
     const [replies, setReplies] = useState(comments)
+    const [isModalVisible, setIsModalVisible] = useState(false)
+    const [text, setText] = useState('')
+    const [selectedId, setSelectedId] = useState(0)
     
     let renderedComments = replies.map(reply => {
         return (
@@ -36,8 +39,63 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
         )
     })
 
+    const handleOk = async () => {
+        try {
+            const params = new URLSearchParams()
+            params.append('text', text)
+            await updateAxios.patch(`/comments/${selectedId}/text`, params, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                }
+            })
+
+            let tmpCreatedAt = ''
+            // update comment
+            setReplies(replies.map(reply => {
+                if ( reply.id === selectedId ) {
+                    reply.text = text
+                    tmpCreatedAt = reply.created_at
+                }
+                return reply
+            }))
+            renderedComments = renderedComments.map(reply => {
+                if (reply.key === selectedId) {
+                    return (
+                        <Comment
+                            key={selectedId}
+                            actions={[
+                                <EditOutlined key="edit" onClick={ () => onCommentEditActivate(selectedId) } />,
+                                <DeleteOutlined key="ellipsis" onClick={ () => onCommentDeleteActivate(selectedId) } />,
+                            ]}
+                            author={tmpCreatedAt}
+                            avatar={
+                            <Avatar
+                                src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                                alt="Han Solo"
+                            />
+                            }
+                            content={text}
+                        />
+                    )
+                }
+                return reply
+            })
+            message.success('Comment updated')
+        }
+        catch (error) {
+            message.error('Unable to edit a comment')
+        }
+        setIsModalVisible(false)
+    }
+    
+    const handleCancel = () => {
+        setIsModalVisible(false)
+    }
+
     const onCommentEditActivate = (id: number) => {
-        console.log('edit: ', id)
+        setSelectedId(id)
+        setIsModalVisible(true)
     }
 
     const onCommentDeleteActivate = async (id: number) => {
@@ -108,6 +166,17 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
 
     return (
         <React.Fragment>
+            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <Form>
+                    <Form.Item label="Text">
+                        <Input
+                            value={ text }
+                            onChange={ e => setText(e.target.value) }
+                        />
+                    </Form.Item>
+                </Form>
+            </Modal>
+            {replies.length > 1 ? `${replies.length} replies` : `${replies.length} reply`}
             {renderedComments}
             <Form.Item>
                 <TextArea rows={4} onChange={ e => setValue(e.target.value) } value={value} />
