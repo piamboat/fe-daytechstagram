@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next'
 import Cookies from 'cookies'
 import { Axios } from '../../api/daytechbackend'
 import { Post } from '@/components/Type'
-import { Comment, Avatar, PageHeader, Button } from 'antd'
+import { Comment, Avatar, PageHeader, Button, message } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
 import Editor from '@/components/Editor'
@@ -25,14 +25,6 @@ const post:React.FC<postProps> = ({ jwt, post }) => {
         router.push('/')
     }
 
-    const onPostEditActivate = (id: number) => {
-        console.log('edit: ', id)
-    }
-
-    const onPostDeleteActivate = (id: number) => {
-        console.log('delete: ', id)
-    }
-
     return (
         <React.Fragment>
             <PageHeader
@@ -44,10 +36,6 @@ const post:React.FC<postProps> = ({ jwt, post }) => {
             />
             <Comment
                 key={post.id}
-                actions={[
-                    <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
-                    <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(post.id) } />,
-                ]}
                 author={post.created_at}
                 avatar={
                 <Avatar

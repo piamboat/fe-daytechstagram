@@ -21,8 +21,8 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
             <Comment
                 key={reply.id}
                 actions={[
-                    <EditOutlined key="edit" onClick={ () => onPostEditActivate(reply.id) } />,
-                    <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(reply.id) } />,
+                    <EditOutlined key="edit" onClick={ () => onCommentEditActivate(reply.id) } />,
+                    <DeleteOutlined key="ellipsis" onClick={ () => onCommentDeleteActivate(reply.id) } />,
                 ]}
                 author={reply.created_at}
                 avatar={
@@ -36,12 +36,25 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
         )
     })
 
-    const onPostEditActivate = (id: number) => {
+    const onCommentEditActivate = (id: number) => {
         console.log('edit: ', id)
     }
 
-    const onPostDeleteActivate = (id: number) => {
-        console.log('delete: ', id)
+    const onCommentDeleteActivate = async (id: number) => {
+        try {
+            await Axios.delete(`/comments/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                }
+            })
+            // set comments
+            setReplies(replies.filter(reply => reply.id !== id))
+            renderedComments = renderedComments.filter(comment => comment.key !== id)
+            message.success('Successfully delete a comment')
+        }
+        catch (error) {
+            message.error('Unable to delete a comment')
+        }
     }
 
     const onSubmit = async () => {
@@ -73,8 +86,8 @@ const Editor: React.FC<EditorProps> = ({ comments, postId, jwt }) => {
                     <Comment
                         key={data.id}
                         actions={[
-                            <EditOutlined key="edit" onClick={ () => onPostEditActivate(data.id) } />,
-                            <DeleteOutlined key="ellipsis" onClick={ () => onPostDeleteActivate(data.id) } />,
+                            <EditOutlined key="edit" onClick={ () => onCommentEditActivate(data.id) } />,
+                            <DeleteOutlined key="ellipsis" onClick={ () => onCommentDeleteActivate(data.id) } />,
                         ]}
                         author={data.created_at}
                         avatar={
