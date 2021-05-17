@@ -1,11 +1,12 @@
 import React from 'react'
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps } from 'next'
 import Cookies from 'cookies'
-import { Axios } from '../../api/daytechbackend';
-import { Post } from '@/components/Type';
-import { Comment, Avatar, PageHeader, Button } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Axios } from '../../api/daytechbackend'
+import { Post } from '@/components/Type'
+import { Comment, Avatar, PageHeader, Button } from 'antd'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useRouter } from 'next/router'
+import Editor from '@/components/Editor'
 
 // using cookie-cutter package
 const cookieCutter = require('cookie-cutter');
@@ -57,6 +58,17 @@ const post:React.FC<postProps> = ({ jwt, post }) => {
                 content={post.text}
             >
                 {post.comments.length > 1 ? `${post.comments.length} replies` : `${post.comments.length} reply`}
+                <Comment
+                    avatar={
+                        <Avatar
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                        alt="Han Solo"
+                        />
+                    }
+                    content={
+                        <Editor />
+                    }
+                />
             </Comment>
         </React.Fragment>
     )
