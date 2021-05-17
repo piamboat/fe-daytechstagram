@@ -58,7 +58,7 @@ const post:React.FC<postProps> = ({ jwt, post }) => {
                 content={post.text}
             >
                 {post.comments.length > 1 ? `${post.comments.length} replies` : `${post.comments.length} reply`}
-                <Editor comments={post.comments} />
+                <Editor comments={post.comments} postId={post.id} jwt={jwt} />
             </Comment>
         </React.Fragment>
     )
