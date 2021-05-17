@@ -1,6 +1,7 @@
 export interface Post {
     id: number,
     text: string,
+    image: string,
     created_at: string,
     updated_at: string,
     comments: Comment[],

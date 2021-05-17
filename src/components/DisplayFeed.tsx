@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Post } from './Type';
-import { Comment, Avatar, Modal, Form, Input } from 'antd'
+import { Comment, Avatar, Modal, Form, Input, Image } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Link from 'next/link';
 
@@ -46,6 +46,14 @@ const DisplayFeed:React.FC<DisplayFeedProps> = ({ posts, onPostEdit, onPostDelet
                         </Form.Item>
                     </Form>
                 </Modal>
+                {
+                    post.image !== 'noimage.jpeg' ?
+                    <Image
+                        width={200}
+                        src={`http://localhost:3000/upload/${post.image}`}
+                    />
+                    : null
+                }
                 <Comment
                     actions={[
                         <EditOutlined key="edit" onClick={ () => onPostEditActivate(post.id) } />,
