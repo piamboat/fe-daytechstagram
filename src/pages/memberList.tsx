@@ -4,17 +4,21 @@ import {
   UserOutlined,
   LineChartOutlined,
   TeamOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
-const { Search } = Input;
+const suffix = (
+  <SearchOutlined
+    style={{
+      fontSize: 16,
+      color: "#BFBFBF",
+    }}
+  />
+);
 
 const memberList: React.FC = () => {
-  const onSearch = (value: string) => {
-    console.log(value);
-  };
-
   return (
     <Layout
       className="min-h-screen"
@@ -84,10 +88,10 @@ const memberList: React.FC = () => {
         >
           <Layout style={{ background: "#F0F0F0", padding: "10px 10px 10px" }}>
             <div className="md:flex">
-              <Search
+              <Input
                 placeholder="Search"
                 allowClear
-                onSearch={onSearch}
+                suffix={suffix}
                 style={{
                   width: "70%",
                 }}
