@@ -1,4 +1,4 @@
-import { Layout, Menu, Breadcrumb, Input } from "antd";
+import { Layout, Menu, Breadcrumb, Input, DatePicker } from "antd";
 import {
   GitlabOutlined,
   UserOutlined,
@@ -82,16 +82,23 @@ const memberList: React.FC = () => {
             padding: "0 8px 2px",
           }}
         >
-          <Search
-            placeholder="Search"
-            allowClear
-            onSearch={onSearch}
-            style={{
-              width: "70%",
-              padding: "10px 10px 10px",
-              background: "#F0F0F0",
-            }}
-          />
+          <Layout style={{ background: "#F0F0F0", padding: "10px 10px 10px" }}>
+            <div className="md:flex">
+              <Search
+                placeholder="Search"
+                allowClear
+                onSearch={onSearch}
+                style={{
+                  width: "70%",
+                }}
+              />
+              <DatePicker.RangePicker
+                style={{
+                  width: "30%",
+                }}
+              />
+            </div>
+          </Layout>
         </Content>
       </Layout>
     </Layout>
