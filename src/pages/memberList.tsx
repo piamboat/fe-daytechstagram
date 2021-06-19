@@ -1,4 +1,4 @@
-import { Layout, Menu, Breadcrumb } from "antd";
+import { Layout, Menu, Breadcrumb, Input } from "antd";
 import {
   GitlabOutlined,
   UserOutlined,
@@ -7,9 +7,14 @@ import {
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
+const { Search } = Input;
 
 const memberList: React.FC = () => {
+  const onSearch = (value: string) => {
+    console.log(value);
+  };
+
   return (
     <Layout
       className="min-h-screen"
@@ -66,21 +71,27 @@ const memberList: React.FC = () => {
           <Menu.Item key="2">Marketing</Menu.Item>
         </Menu>
         <Breadcrumb
-          style={{ margin: "16px 0", padding: "0 24px 24px" }}
+          style={{ margin: "16px 0", padding: "0 24px 2px" }}
           separator=">"
         >
           <Breadcrumb.Item>Member</Breadcrumb.Item>
           <Breadcrumb.Item>Member management</Breadcrumb.Item>
         </Breadcrumb>
         <Content
-          className="site-layout-background"
           style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
+            padding: "0 8px 2px",
           }}
         >
-          Content
+          <Search
+            placeholder="Search"
+            allowClear
+            onSearch={onSearch}
+            style={{
+              width: "70%",
+              padding: "10px 10px 10px",
+              background: "#F0F0F0",
+            }}
+          />
         </Content>
       </Layout>
     </Layout>
