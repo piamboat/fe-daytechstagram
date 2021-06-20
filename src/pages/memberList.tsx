@@ -7,6 +7,7 @@ import {
   Table,
   Tooltip,
   Button,
+  Avatar,
 } from "antd";
 import {
   GitlabOutlined,
@@ -14,6 +15,7 @@ import {
   LineChartOutlined,
   TeamOutlined,
   SearchOutlined,
+  BellOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -292,6 +294,8 @@ const memberList: React.FC = () => {
         >
           <Menu.Item key="1">Customer Service</Menu.Item>
           <Menu.Item key="2">Marketing</Menu.Item>
+          <BellOutlined style={{ margin: "12px 1px", padding: "0 24px 2px" }} />
+          <Avatar icon={<UserOutlined />} />
         </Menu>
         <div className="md:flex justify-between">
           <Breadcrumb
