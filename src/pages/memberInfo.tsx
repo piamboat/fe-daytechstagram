@@ -9,11 +9,14 @@ import {
   Avatar,
   PageHeader,
   Dropdown,
-  Form,
   Row,
   Col,
   Select,
-  InputNumber,
+  Divider,
+  Card,
+  Upload,
+  Space,
+  Form,
 } from "antd";
 import {
   GitlabOutlined,
@@ -24,6 +27,7 @@ import {
   BellOutlined,
   EllipsisOutlined,
   FilterFilled,
+  EditFilled, UploadOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -195,125 +199,191 @@ const memberInfo: React.FC = () => {
               />
             </div>
           </Layout>
-          {/* content */}
-          <Form>
-            <Row>
-              <Col span={12}>
-                <Form.Item
-                  name={["user", "name"]}
-                  label="Name"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item name={["user", "url"]} label="URL">
-                  <Input />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col span={12}>
-                <Form.Item
-                  name="type"
-                  label="Type"
-                  hasFeedback
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select the type of your device!",
-                    },
-                  ]}
-                >
-                  <Select placeholder="Producer">
-                    <Option value="producer"> Producer </Option>
-                    <Option value="consumer"> Consumer </Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Price">
-                  <Form.Item name="price" noStyle>
-                    <InputNumber min={0} />
-                  </Form.Item>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <Form.Item label="Min balance">
-                  <Form.Item name="min-balance" noStyle>
-                    <InputNumber min={0} />
-                  </Form.Item>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                <Form.Item name={["user", "location"]} label="Location">
-                  <Input />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
-                  name="network"
-                  label="Network"
-                  hasFeedback
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select the Network",
-                    },
-                  ]}
-                >
-                  <Select placeholder="net1">
-                    <Option value="net1"> Network 1 </Option>
-                    <Option value="net2"> Network 2 </Option>
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                {" "}
-                <Form.Item label="Minimum amount">
-                  <Form.Item name="min-offer-amount" noStyle>
-                    <InputNumber min={0} />
-                  </Form.Item>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                {" "}
-                <Form.Item label="Minimum amount">
-                  <Form.Item name="min-offer-amount" noStyle>
-                    <InputNumber min={0} />
-                  </Form.Item>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Form.Item
-              wrapperCol={{
-                span: 12,
-                offset: 6,
-              }}
-            >
-              <Button shape="round" type="primary" htmlType="submit">
-                Add a device
-              </Button>
-
-              <Button shape="round" danger>
-                Cancel
-              </Button>
-            </Form.Item>
-          </Form>
+          {/* begining of content */}
+          <div className="min-h-screen">
+            <Space className="w-full" direction="vertical">
+              <Card className="container mx-auto">
+                <p>Personal info</p>
+                <Divider />
+                <Row gutter={[20, 0]}>
+                  <Col span={12}>
+                    <Form>
+                      <Form.Item>
+                        Username
+                        <Input placeholder="Type" />
+                        First name
+                        <Input placeholder="Type" />
+                        ID card number
+                        <Input placeholder="Type" />
+                        Phone number
+                        <Input placeholder="Type" />
+                        Line
+                        <Input placeholder="Type" />
+                        First login Date / Time
+                        <Input placeholder="Type" />
+                      </Form.Item>
+                    </Form>
+                  </Col>
+                  <Col span={12}>
+                    <Form>
+                      <Form.Item>
+                        Password
+                        <Input placeholder="Type" />
+                        Last name
+                        <Input placeholder="Type" />
+                        <div className="flex">
+                          <Row className="mr-2">
+                            <p>Gender</p>
+                            <Input.Group compact>
+                              <Select defaultValue="Option1 " className="w-full">
+                                <Option value="Option1">Male</Option>
+                                <Option value="Option2">Female</Option>
+                                <Option value="Option3">LGBT</Option>
+                              </Select>
+                            </Input.Group>
+                          </Row>
+                          <Row className="mr-2">
+                            <p>DOB</p>
+                            <Input.Group compact>
+                              <DatePicker />
+                            </Input.Group>
+                          </Row>
+                          <Row className="w-full mr-2">
+                            <p>Age</p>
+                            <Input />
+                          </Row>
+                        </div>
+                        Email
+                        <Input placeholder="Type" />
+                        Created by
+                        <Input placeholder="Type" />
+                        First login IP address
+                        <Input placeholder="Type" />
+                      </Form.Item>
+                      <br />
+                      <Form.Item>
+                        <Row className="flex justify-end">
+                          <Button type="primary" ghost>
+                            Update
+                          </Button>
+                        </Row>
+                      </Form.Item>
+                    </Form>
+                  </Col>
+                </Row>
+              </Card>
+              {/* <Card className="container mx-auto">
+                <p>Emergency contact</p>
+                <Divider />
+                <Row gutter={[20, 0]}>
+                  <Col span={12}>
+                    <p>Address</p>
+                    <Input placeholder="Type" />
+                    <p>Phone number</p>
+                    <Input placeholder="Type" />
+                    <p>Address</p>
+                    <Input placeholder="Type" />
+                    <p>Phone number</p>
+                    <Input placeholder="Type" />
+                  </Col>
+                  <Col span={12}>
+                    <p>Relation</p>
+                    <Input.Group compact>
+                      <Select defaultValue="Type" className="w-full">
+                        <Option value="Option1">Option1</Option>
+                        <Option value="Option2">Option2</Option>
+                      </Select>
+                    </Input.Group>
+                    <br />
+                    <br />
+                    <p className="mt-2.5">Relation</p>
+                    <Input.Group compact>
+                      <Select defaultValue="Type" className="w-full">
+                        <Option value="Option1">Option1</Option>
+                        <Option value="Option2">Option2</Option>
+                      </Select>
+                    </Input.Group>
+                    <br />
+                    <br />
+                    <div className="flex justify-end">
+                      <br />
+                      <Button type="primary" ghost>
+                        Update
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Card>
+              <Card className="container mx-auto">
+                <p>Payroll</p>
+                <Divider />
+                <Row gutter={[20, 0]}>
+                  <Col span={12}>
+                    <p>Relation</p>
+                    <Input.Group compact>
+                      <Select defaultValue="Type" className="w-full">
+                        <Option value="Option1">Option1</Option>
+                        <Option value="Option2">Option2</Option>
+                      </Select>
+                    </Input.Group>
+                    <p>Address</p>
+                    <Input placeholder="Type" />
+                  </Col>
+                  <Col span={12}>
+                    <p>Bank account</p>
+                    <Input placeholder="Type" />
+                    <br />
+                    <br />
+                    <div className="flex justify-end">
+                      <br />
+                      <Button type="primary" ghost>
+                        Update
+                      </Button>
+                    </div>
+                  </Col>
+                </Row>
+              </Card>
+              <Card className="container mx-auto">
+                <p>Transcript</p>
+                <Divider />
+                <Space className="w-full" direction="vertical">
+                  <p>สำเนาบัตรประชาชน</p>
+                  <Card>
+                    <Upload className="flex justify-between">
+                      <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                  </Card>
+                  <p>เอกสารการศึกษา</p>
+                  <Card>
+                    <Upload className="flex justify-between">
+                      <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                  </Card>
+                  <p>เอกสารการเกณฑ์ทหาร</p>
+                  <Card>
+                    <Upload className="flex justify-between">
+                      <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                  </Card>
+                  <p>ประวัติอาชญากรรม</p>
+                  <Card>
+                    <Upload className="flex justify-between">
+                      <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                  </Card>
+                </Space>
+                <br />
+                <br />
+                <div className="flex justify-end">
+                  <br />
+                  <Button type="primary" ghost>
+                    Update
+                  </Button>
+                </div>
+              </Card> */}
+            </Space>
+          </div>
+        {/* End of content */}
         </Content>
       </Layout>
     </Layout>
